@@ -14,5 +14,8 @@ That way multiple projects can share the same settings (useful for formatting ru
 Any value defined here will override the pom.xml file value but is only applicable to the current project.
 -->
         <org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>WildFly</org-netbeans-modules-maven-j2ee.netbeans_2e_hint_2e_deploy_2e_server>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_PersonaWS>http://localhost:8080/registrocivil-web/PersonaWS?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_PersonaWS>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_EstablecimientoWS>http://localhost:8080/sri-web/EstablecimientoWS?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_EstablecimientoWS>
+        <org-netbeans-modules-maven-jaxws._5f_C_5f_ContribuyenteWS>http://localhost:8080/sri-web/ContribuyenteWS?wsdl</org-netbeans-modules-maven-jaxws._5f_C_5f_ContribuyenteWS>
     </properties>
 </project-shared-configuration>

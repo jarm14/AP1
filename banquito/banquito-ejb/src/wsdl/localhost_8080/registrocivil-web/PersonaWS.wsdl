@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.registrocivil.arquitectura.espe.edu.ec/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="PersonaWS" targetNamespace="http://ws.registrocivil.arquitectura.espe.edu.ec/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.registrocivil.arquitectura.espe.edu.ec/" elementFormDefault="unqualified" targetNamespace="http://ws.registrocivil.arquitectura.espe.edu.ec/" version="1.0">
+
+  <xs:element name="obtenerDatosPersona" type="tns:obtenerDatosPersona"/>
+
+  <xs:element name="obtenerDatosPersonaResponse" type="tns:obtenerDatosPersonaResponse"/>
+
+  <xs:complexType name="obtenerDatosPersona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cedula" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerDatosPersonaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:persona"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="persona">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantonVivienda" type="xs:string"/>
+      <xs:element minOccurs="0" name="cedula" type="xs:string"/>
+      <xs:element minOccurs="0" name="estadoCivil" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaNacimiento" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="genero" type="xs:string"/>
+      <xs:element minOccurs="0" name="lugarNacimiento" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="obtenerDatosPersonaResponse">
+    <wsdl:part element="tns:obtenerDatosPersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerDatosPersona">
+    <wsdl:part element="tns:obtenerDatosPersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PersonaWS">
+    <wsdl:operation name="obtenerDatosPersona">
+      <wsdl:input message="tns:obtenerDatosPersona" name="obtenerDatosPersona">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerDatosPersonaResponse" name="obtenerDatosPersonaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PersonaWSSoapBinding" type="tns:PersonaWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerDatosPersona">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerDatosPersona">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerDatosPersonaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PersonaWS">
+    <wsdl:port binding="tns:PersonaWSSoapBinding" name="PersonaWSPort">
+      <soap:address location="http://localhost:8080/registrocivil-web/PersonaWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

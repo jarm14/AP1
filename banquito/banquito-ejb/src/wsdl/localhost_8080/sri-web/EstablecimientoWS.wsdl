@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.sri.arquitectura.espe.edu.ec/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="EstablecimientoWS" targetNamespace="http://ws.sri.arquitectura.espe.edu.ec/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.sri.arquitectura.espe.edu.ec/" elementFormDefault="unqualified" targetNamespace="http://ws.sri.arquitectura.espe.edu.ec/" version="1.0">
+
+  <xs:element name="obtenerEstablecimientosActivos" type="tns:obtenerEstablecimientosActivos"/>
+
+  <xs:element name="obtenerEstablecimientosActivosResponse" type="tns:obtenerEstablecimientosActivosResponse"/>
+
+  <xs:element name="obtenerMatriz" type="tns:obtenerMatriz"/>
+
+  <xs:element name="obtenerMatrizResponse" type="tns:obtenerMatrizResponse"/>
+
+  <xs:complexType name="obtenerEstablecimientosActivos">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ruc" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerEstablecimientosActivosResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:establecimiento"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="establecimiento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="canton" type="xs:string"/>
+      <xs:element minOccurs="0" name="contribuyente" type="tns:contribuyente"/>
+      <xs:element minOccurs="0" name="direccion" type="xs:string"/>
+      <xs:element minOccurs="0" name="establecimientoPK" type="tns:establecimientoPK"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombreComercialEstablecimiento" type="xs:string"/>
+      <xs:element minOccurs="0" name="provincia" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="contribuyente">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="establecimientoList" nillable="true" type="tns:establecimiento"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombreComercial" type="xs:string"/>
+      <xs:element minOccurs="0" name="razonSocial" type="xs:string"/>
+      <xs:element minOccurs="0" name="ruc" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="establecimientoPK">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigoEstablecimiento" type="xs:string"/>
+      <xs:element minOccurs="0" name="ruc" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerMatriz">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ruc" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerMatrizResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:establecimiento"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="obtenerEstablecimientosActivosResponse">
+    <wsdl:part element="tns:obtenerEstablecimientosActivosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerMatrizResponse">
+    <wsdl:part element="tns:obtenerMatrizResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerEstablecimientosActivos">
+    <wsdl:part element="tns:obtenerEstablecimientosActivos" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerMatriz">
+    <wsdl:part element="tns:obtenerMatriz" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EstablecimientoWS">
+    <wsdl:operation name="obtenerEstablecimientosActivos">
+      <wsdl:input message="tns:obtenerEstablecimientosActivos" name="obtenerEstablecimientosActivos">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerEstablecimientosActivosResponse" name="obtenerEstablecimientosActivosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerMatriz">
+      <wsdl:input message="tns:obtenerMatriz" name="obtenerMatriz">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerMatrizResponse" name="obtenerMatrizResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EstablecimientoWSSoapBinding" type="tns:EstablecimientoWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerEstablecimientosActivos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerEstablecimientosActivos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerEstablecimientosActivosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerMatriz">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="obtenerMatriz">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="obtenerMatrizResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EstablecimientoWS">
+    <wsdl:port binding="tns:EstablecimientoWSSoapBinding" name="EstablecimientoWSPort">
+      <soap:address location="http://localhost:8080/sri-web/EstablecimientoWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
