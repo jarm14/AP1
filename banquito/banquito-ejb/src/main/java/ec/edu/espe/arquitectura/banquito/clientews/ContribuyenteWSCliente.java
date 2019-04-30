@@ -11,6 +11,7 @@ import ec.edu.espe.arquitectura.banquito.clientewscont.ContribuyenteWS_Service;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.xml.ws.BindingProvider;
 
 /**
  *
@@ -23,10 +24,13 @@ public class ContribuyenteWSCliente implements Serializable {
 
     private ContribuyenteWS_Service invoker;
     private ContribuyenteWS contribuyenteCliente;
+    private BindingProvider bindingProvider;
 
     public void iniciarCliente() {
         this.invoker = new ContribuyenteWS_Service();
         this.contribuyenteCliente = invoker.getContribuyenteWSPort();
+        this.bindingProvider = (BindingProvider) contribuyenteCliente;
+        this.bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://127.0.0.1:8080/sri-web/ContribuyenteWS?wsdl");
     }
 
     public Contribuyente obtnerDatosContribuyente(String ruc) {

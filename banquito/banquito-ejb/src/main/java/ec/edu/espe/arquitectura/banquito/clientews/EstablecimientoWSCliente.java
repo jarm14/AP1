@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.xml.ws.BindingProvider;
 
 /**
  *
@@ -24,10 +25,13 @@ public class EstablecimientoWSCliente implements Serializable {
 
     private EstablecimientoWS_Service invoker;
     private EstablecimientoWS establecimientoCliente;
+    private BindingProvider bindingProvider;
 
     public void iniciarCliente() {
         this.invoker = new EstablecimientoWS_Service();
         this.establecimientoCliente = invoker.getEstablecimientoWSPort();
+        this.bindingProvider = (BindingProvider) establecimientoCliente;
+        this.bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://127.0.0.1:8080/sri-web/EstablecimientoWS?wsdl");
     }
 
     public Establecimiento obtenerMatriz(String ruc) {

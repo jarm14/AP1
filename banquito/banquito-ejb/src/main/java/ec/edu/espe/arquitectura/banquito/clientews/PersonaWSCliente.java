@@ -11,6 +11,7 @@ import ec.edu.espe.arquitectura.banquito.clientewsper.PersonaWS_Service;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.xml.ws.BindingProvider;
 
 /**
  *
@@ -23,10 +24,13 @@ public class PersonaWSCliente implements Serializable {
 
     private PersonaWS_Service invoker;
     private PersonaWS personaCliente;
+    private BindingProvider bindingProvider;
 
     public void iniciarCliente() {
         this.invoker = new PersonaWS_Service();
         this.personaCliente = invoker.getPersonaWSPort();
+        this.bindingProvider = (BindingProvider) personaCliente;
+        this.bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://127.0.0.1:8080/registrocivil-web/PersonaWS?wsdl");
     }
 
     public Persona obtenerDatosPersona(String cedula) {

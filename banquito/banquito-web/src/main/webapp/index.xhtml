@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Transferencia</title>
+    </h:head>
+    <body>
+        <o:form id="transferenciaForm">
+            <p:growl id="growl">
+                <p:autoUpdate/>
+            </p:growl> 
+            <p:panelGrid id="panelPrincipal"
+                         columns="1">
+                <p:wizard flowListener="#{indexBean.onFlowProcess}">
+                    <p:tab id="persona" title="Persona">
+                        <p:messages/>
+                            <p:panelGrid id="datosPersonales"
+                                         columns="2">
+                                <p:outputLabel for="cedulaPersona" value="Cedula:"/>
+                                <p:inputText id="cedulaPersona" value="#{indexBean.cedulaPersona}">
+                                    <p:ajax event="blur" listener="#{indexBean.obtenerPersona()}" update="growl transferenciaForm:datosPersonales"/>
+                                </p:inputText>
+
+                                <p:outputLabel for="nombrePersona" value="Nombre:"/>
+                                <h:outputText id="nombrePersona" value="#{indexBean.personaSeleccionada.nombre}"/>
+
+                                <p:outputLabel for="generoPersona" value="Género:"/>
+                                <h:outputText id="generoPersona" value="#{indexBean.obtenerGenero()}"/>
+
+                                <p:outputLabel for="fechaNac" value="Fecha nacimiento:"/>
+                                <h:outputText id="fechaNac" value="#{indexBean.obtenerFechaNac()}"/>
+
+                                <p:outputLabel for="estadoCivil" value="Estado civil:"/>
+                                <h:outputText id="estadoCivil" value="#{indexBean.obtenerEstadoCivil()}"/>
+
+                                <p:outputLabel for="cantonVivienda" value="Cantón:"/>
+                                <h:outputText id="cantonVivienda" value="#{indexBean.personaSeleccionada.cantonVivienda}"/>
+
+                                <p:outputLabel for="lugarNac" value="Lugar nacimiento:"/>
+                                <h:outputText id="lugarNac" value="#{indexBean.personaSeleccionada.lugarNacimiento}"/>
+                            </p:panelGrid>
+                    </p:tab>
+
+                    <p:tab id="contribuyente" title="Contribuyente">
+                        <p:messages/>
+                    </p:tab>
+                </p:wizard>
+            </p:panelGrid>
+
+        </o:form>
+    </body>
+</html>
