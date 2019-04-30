@@ -22,35 +22,88 @@
                 <p:wizard flowListener="#{indexBean.onFlowProcess}">
                     <p:tab id="persona" title="Persona">
                         <p:messages/>
-                            <p:panelGrid id="datosPersonales"
-                                         columns="2">
-                                <p:outputLabel for="cedulaPersona" value="Cedula:"/>
-                                <p:inputText id="cedulaPersona" value="#{indexBean.cedulaPersona}">
-                                    <p:ajax event="blur" listener="#{indexBean.obtenerPersona()}" update="growl transferenciaForm:datosPersonales"/>
-                                </p:inputText>
+                        <p:panelGrid id="datosPersonales"
+                                     columns="2">
+                            <p:outputLabel for="cedulaPersona" value="Cedula:"/>
+                            <p:inputText id="cedulaPersona" value="#{indexBean.cedulaPersona}">
+                                <p:ajax event="blur" listener="#{indexBean.obtenerPersona()}" update="growl transferenciaForm:datosPersonales"/>
+                            </p:inputText>
 
-                                <p:outputLabel for="nombrePersona" value="Nombre:"/>
-                                <h:outputText id="nombrePersona" value="#{indexBean.personaSeleccionada.nombre}"/>
+                            <p:outputLabel for="nombrePersona" value="Nombre:"/>
+                            <h:outputText id="nombrePersona" value="#{indexBean.personaSeleccionada.nombre}"/>
 
-                                <p:outputLabel for="generoPersona" value="Género:"/>
-                                <h:outputText id="generoPersona" value="#{indexBean.obtenerGenero()}"/>
+                            <p:outputLabel for="generoPersona" value="Género:"/>
+                            <h:outputText id="generoPersona" value="#{indexBean.obtenerGenero()}"/>
 
-                                <p:outputLabel for="fechaNac" value="Fecha nacimiento:"/>
-                                <h:outputText id="fechaNac" value="#{indexBean.obtenerFechaNac()}"/>
+                            <p:outputLabel for="fechaNac" value="Fecha nacimiento:"/>
+                            <h:outputText id="fechaNac" value="#{indexBean.obtenerFechaNac()}"/>
 
-                                <p:outputLabel for="estadoCivil" value="Estado civil:"/>
-                                <h:outputText id="estadoCivil" value="#{indexBean.obtenerEstadoCivil()}"/>
+                            <p:outputLabel for="estadoCivil" value="Estado civil:"/>
+                            <h:outputText id="estadoCivil" value="#{indexBean.obtenerEstadoCivil()}"/>
 
-                                <p:outputLabel for="cantonVivienda" value="Cantón:"/>
-                                <h:outputText id="cantonVivienda" value="#{indexBean.personaSeleccionada.cantonVivienda}"/>
+                            <p:outputLabel for="cantonVivienda" value="Cantón:"/>
+                            <h:outputText id="cantonVivienda" value="#{indexBean.personaSeleccionada.cantonVivienda}"/>
 
-                                <p:outputLabel for="lugarNac" value="Lugar nacimiento:"/>
-                                <h:outputText id="lugarNac" value="#{indexBean.personaSeleccionada.lugarNacimiento}"/>
-                            </p:panelGrid>
+                            <p:outputLabel for="lugarNac" value="Lugar nacimiento:"/>
+                            <h:outputText id="lugarNac" value="#{indexBean.personaSeleccionada.lugarNacimiento}"/>
+                        </p:panelGrid>
                     </p:tab>
 
                     <p:tab id="contribuyente" title="Contribuyente">
                         <p:messages/>
+                        <p:panelGrid id="datosContribuyente"
+                                     columns="2">
+                            <p:outputLabel for="rucContribuyente" value="RUC:"/>
+                            <p:inputText id="rucContribuyente" value="#{indexBean.rucContribuyente}">
+                                <p:ajax event="blur" listener="#{indexBean.obtenerContribuyente()}" update="growl transferenciaForm:datosContribuyente"/>
+                            </p:inputText>
+
+                            <p:outputLabel for="nombreContribuyente" value="Nombre Comercial:"/>
+                            <h:outputText id="nombreContribuyente" value="#{indexBean.contribuyenteSeleccionado.nombreComercial}"/>
+
+                            <p:outputLabel for="razonContribuyente" value="Razon Social:"/>
+                            <h:outputText id="razonContribuyente" value="#{indexBean.contribuyenteSeleccionado.razonSocial}"/>
+
+                            <p:outputLabel for="estadoContribuyente" value="Estado:"/>
+                            <h:outputText id="estadoContribuyente" value="#{indexBean.obtenerEstadoContribuyente()}"/>
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:messages/>
+                    <p:panelGrid id="datosEstablecimientos"
+                                 columns="1">
+                        <p:dataTable id="dataEstablecimientos" var="est" value="#{indexBean.establecimientos}" 
+                                     selectionMode="single" selection="#{indexBean.establecimientoSeleccionado}">
+                            <f:facet name="header">
+                                Establecimiento
+                            </f:facet>
+                            <p:column headerText="RUC">
+                                <h:outputText value="#{est.establecimientoPK.ruc}" />
+                            </p:column>
+                            <p:column headerText="Codigo Establecimiento">
+                                <h:outputText value="#{est.establecimientoPK.codigoEstablecimiento}" />
+                            </p:column>
+                            <p:column headerText="Nombre Comercial">
+                                <h:outputText value="#{est.nombreComercialEstablecimiento}" />
+                            </p:column>
+                            <p:column headerText="Provincia">
+                                <h:outputText value="#{est.provincia}" />
+                            </p:column>
+                            <p:column headerText="Cantón">
+                                <h:outputText value="#{est.canton}" />
+                            </p:column>
+                            <p:column headerText="Dirección">
+                                <h:outputText value="#{est.direccion}" />
+                            </p:column>
+                            <p:column headerText="Estado">
+                                <h:outputText value="#{est.estado}" />
+                            </p:column>
+                            <!--p:column style="width:32px;text-align: center">
+                                <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="pi pi-search" title="View">
+                                    <f:setPropertyActionListener value="#{car}" target="#{dtSelectionView.selectedCar}" />
+                                </p:commandButton>
+                            </p:column-->
+                        </p:dataTable>
+                    </p:panelGrid>
                     </p:tab>
                 </p:wizard>
             </p:panelGrid>

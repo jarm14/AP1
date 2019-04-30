@@ -9,7 +9,8 @@ import ec.edu.espe.arquitectura.banquito.clientews.ContribuyenteWSCliente;
 import ec.edu.espe.arquitectura.banquito.clientews.EstablecimientoWSCliente;
 import ec.edu.espe.arquitectura.banquito.clientews.PersonaWSCliente;
 import ec.edu.espe.arquitectura.banquito.clientewscont.Contribuyente;
-import ec.edu.espe.arquitectura.banquito.clientewscont.Establecimiento;
+import ec.edu.espe.arquitectura.banquito.clientewsestab.Establecimiento;
+//import ec.edu.espe.arquitectura.banquito.clientewscont.Establecimiento;
 import ec.edu.espe.arquitectura.banquito.clientewsper.Persona;
 import java.io.Serializable;
 import java.util.List;
@@ -171,5 +172,29 @@ public class IndexBean implements Serializable {
             }
         }
         return estadoCivil;
+    }
+    
+     public void obtenerContribuyente() {
+        contribuyenteSeleccionado = contribuyenteWSCliente.obtnerDatosContribuyente(rucContribuyente);
+        if (contribuyenteSeleccionado == null) {
+            Messages.addGlobalWarn("RUC no encontrado");
+        }else{
+            establecimientos= establecimientoWSCliente.obtenerEstablecimientosActivos(contribuyenteSeleccionado.getRuc());
+        }
+    }
+     
+     public String obtenerEstadoContribuyente() {
+        String estado= null;
+        if (contribuyenteSeleccionado != null) {
+            switch ((contribuyenteSeleccionado.getEstado() != null) ? contribuyenteSeleccionado.getEstado() : "N/A") {
+                case "A":
+                    estado= "Activo";
+                    break;
+                case "D":
+                    estado = "Desabilitado";
+                    break;
+            }
+        }
+        return estado;
     }
 }
