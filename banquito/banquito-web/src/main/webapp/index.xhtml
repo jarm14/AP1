@@ -107,34 +107,21 @@
                         <p:panelGrid id="panelMonto"
                             columns="2">
                             <p:outputLabel for="montoTransfer" value="Monto"/>
-                            <h:inputText id="montoTransfer" value="#{indexBean.monto}"/>   
+                            <p:inputNumber id="montoTransfer" value="#{indexBean.monto}"/>   
                         </p:panelGrid>
                     </p:tab>
                     <p:tab id="transferencia" title="Transferencia">
                         <p:messages/>
                         <p:panelGrid id="datosTransferencia"
                                      columns="2">
-                            <p:outputLabel for="establecimientosLst" value="Establecimiento:"/>
-                            <p:selectOneMenu id="establecimientosLst"
-                                             value="#{indexBean.establecimientoSeleccionado}"
-                                             converter="omnifaces.SelectItemsConverter"
-                                             required="true"
-                                             requiredMessage="El campo etablecimimiento es obligatorio">
-                                <f:selectItem itemLabel="Seleccione uno" itemDisabled="#{null}"/>
-                                <f:selectItems value="#{indexBean.establecimientos}"
-                                               var="establecimiento"
-                                               itemLabel="#{establecimiento.establecimientoPK.codigoEstablecimiento}"
-                                               itemValue="#{establecimiento}"/>
-                                <p:ajax update="transferenciaForm:datosEstablecimientos"/>
-                            </p:selectOneMenu>
                             <p:outputLabel for="razon" value="Contribuyente"/>
                             <h:outputText id="razon" value="#{indexBean.contribuyenteSeleccionado.nombreComercial}"/>
                             
-                            <p:outputLabel for="rucEstab" value="Ruc:"/>
-                            <h:outputText id="rucEstab" value="#{indexBean.establecimientoSeleccionado.establecimientoPK.ruc}"/>
+                            <p:outputLabel for="rucTran" value="Ruc:"/>
+                            <h:outputText id="rucTran" value="#{indexBean.establecimientoSeleccionado.establecimientoPK.ruc}"/>
                             
-                            <p:outputLabel for="codEstab" value="Código establecimiento:"/>
-                            <h:outputText id="codEstab" value="#{indexBean.establecimientoSeleccionado.establecimientoPK.codigoEstablecimiento}"/>
+                            <p:outputLabel for="codTran" value="Código establecimiento:"/>
+                            <h:outputText id="codTran" value="#{indexBean.establecimientoSeleccionado.establecimientoPK.codigoEstablecimiento}"/>
 
                             <p:outputLabel for="monto" value="Monto a transferir:"/>
                             <h:outputText id="monto" value="#{indexBean.monto}"/>
