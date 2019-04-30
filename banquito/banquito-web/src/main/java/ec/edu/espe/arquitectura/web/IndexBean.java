@@ -12,6 +12,7 @@ import ec.edu.espe.arquitectura.banquito.clientewscont.Contribuyente;
 import ec.edu.espe.arquitectura.banquito.clientewsestab.Establecimiento;
 import ec.edu.espe.arquitectura.banquito.clientewsper.Persona;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -45,6 +46,7 @@ public class IndexBean implements Serializable {
     private List<Establecimiento> establecimientos;
     private String cedulaPersona;
     private String rucContribuyente;
+    private BigDecimal monto;
 
     public Persona getPersonaSeleccionada() {
         return personaSeleccionada;
@@ -92,6 +94,14 @@ public class IndexBean implements Serializable {
 
     public void setRucContribuyente(String rucContribuyente) {
         this.rucContribuyente = rucContribuyente;
+    }
+
+    public BigDecimal getMonto() {
+        return monto;
+    }
+
+    public void setMonto(BigDecimal monto) {
+        this.monto = monto;
     }
 
     @PostConstruct
@@ -216,5 +226,20 @@ public class IndexBean implements Serializable {
             }
         }
         return estado;
+    }
+    
+    public void confirmarTransferencia(){
+         Messages.addFlashGlobalInfo("La trasnferencia fue realizada con éxito.");
+         cleanBean();
+    }
+    
+    public void cleanBean(){
+        personaSeleccionada=null;
+        cedulaPersona=null;
+        contribuyenteSeleccionado=null;
+        rucContribuyente=null;
+        establecimientos=null;
+        establecimientoSeleccionado=null;
+        monto= BigDecimal.ZERO;
     }
 }
