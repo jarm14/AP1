@@ -6,16 +6,12 @@
 package ec.edu.espe.arquitectura.sri.model;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -44,8 +40,6 @@ public class Contribuyente implements Serializable {
     @Size(max = 20)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "contribuyente", fetch = FetchType.LAZY)
-    private List<Establecimiento> establecimientoList;
 
     public Contribuyente() {
     }
@@ -86,14 +80,6 @@ public class Contribuyente implements Serializable {
         this.estado = estado;
     }
 
-    public List<Establecimiento> getEstablecimientoList() {
-        return establecimientoList;
-    }
-
-    public void setEstablecimientoList(List<Establecimiento> establecimientoList) {
-        this.establecimientoList = establecimientoList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -103,7 +89,6 @@ public class Contribuyente implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Contribuyente)) {
             return false;
         }
@@ -118,5 +103,5 @@ public class Contribuyente implements Serializable {
     public String toString() {
         return "ec.edu.espe.arquitectura.sri.model.Contribuyente[ ruc=" + ruc + " ]";
     }
-    
+
 }

@@ -37,6 +37,7 @@ public class EstablecimientoFacade extends AbstractFacade<Establecimiento> {
         Establecimiento establecimiento = null;
         try {
             List<Establecimiento> establecimientos = em.createQuery("SELECT e FROM Establecimiento e "
+                    + "JOIN FETCH e.contribuyente "
                     + "WHERE e.establecimientoPK.ruc=:ruc "
                     + "ORDER BY e.establecimientoPK.codigoEstablecimiento ASC",
                     Establecimiento.class).setParameter("ruc", ruc)
@@ -52,6 +53,7 @@ public class EstablecimientoFacade extends AbstractFacade<Establecimiento> {
         List<Establecimiento> establecimientos = null;
         try {
             establecimientos = em.createQuery("SELECT e FROM Establecimiento e "
+                    + "JOIN FETCH e.contribuyente "
                     + "WHERE e.establecimientoPK.ruc=:ruc AND e.estado='A'",
                     Establecimiento.class).setParameter("ruc", ruc)
                     .getResultList();
