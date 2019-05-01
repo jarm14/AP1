@@ -47,6 +47,8 @@ public class IndexBean implements Serializable {
     private String cedulaPersona;
     private String rucContribuyente;
     private BigDecimal monto;
+    private Boolean siguiente;
+    private String mensaje;
 
     public Persona getPersonaSeleccionada() {
         return personaSeleccionada;
@@ -109,16 +111,28 @@ public class IndexBean implements Serializable {
         personaWSCliente.iniciarCliente();
         contribuyenteWSCliente.iniciarCliente();
         establecimientoWSCliente.iniciarCliente();
+        monto = null;
+        siguiente = Boolean.FALSE;
+        mensaje = "";
     }
 
     public String onFlowProcess(FlowEvent event) {
-        return event.getNewStep();
+        if (siguiente) {
+            return event.getNewStep();
+        } else {
+            Messages.addGlobalWarn(mensaje);
+            return event.getOldStep();
+        }
     }
 
     public void obtenerPersona() {
         personaSeleccionada = personaWSCliente.obtenerDatosPersona(cedulaPersona);
         if (personaSeleccionada == null) {
             Messages.addGlobalWarn("Cedula no encontrada");
+            mensaje = "Cedula no encontrada";
+            siguiente = Boolean.FALSE;
+        } else {
+            siguiente = Boolean.TRUE;
         }
     }
 
@@ -187,8 +201,11 @@ public class IndexBean implements Serializable {
         contribuyenteSeleccionado = contribuyenteWSCliente.obtnerDatosContribuyente(rucContribuyente);
         if (contribuyenteSeleccionado == null) {
             Messages.addGlobalWarn("RUC no encontrado");
+            mensaje = "RUC no encontrado";
+            siguiente = Boolean.FALSE;
         } else {
             establecimientos = establecimientoWSCliente.obtenerEstablecimientosActivos(contribuyenteSeleccionado.getRuc());
+            siguiente = Boolean.TRUE;
         }
     }
 
@@ -227,19 +244,33 @@ public class IndexBean implements Serializable {
         }
         return estado;
     }
-    
-    public void confirmarTransferencia(){
-         Messages.addFlashGlobalInfo("La trasnferencia fue realizada con éxito.");
-         cleanBean();
+
+    public void confirmarTransferencia() {
+        Messages.addFlashGlobalInfo("La trasnferencia fue realizada con éxito.");
+        cleanBean();
     }
-    
-    public void cleanBean(){
-        personaSeleccionada=null;
-        cedulaPersona=null;
-        contribuyenteSeleccionado=null;
-        rucContribuyente=null;
-        establecimientos=null;
-        establecimientoSeleccionado=null;
-        monto= BigDecimal.ZERO;
+
+    public void cleanBean() {
+        personaSeleccionada = null;
+        cedulaPersona = null;
+        contribuyenteSeleccionado = null;
+        rucContribuyente = null;
+        establecimientos = null;
+        establecimientoSeleccionado = null;
+        monto = null;
+    }
+
+    public void validarMonto() {
+        if (monto != null) {
+            if (monto.compareTo(BigDecimal.ZERO) <= 0) {
+                Messages.addGlobalWarn("El monto de transferencia debe ser mayor a 0");
+                mensaje = "El monto de transferencia debe ser mayor a 0";
+                siguiente = Boolean.FALSE;
+            } else {
+                siguiente = Boolean.TRUE;
+            }
+        } else {
+            siguiente = Boolean.FALSE;
+        }
     }
 }

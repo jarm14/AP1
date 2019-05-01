@@ -19,9 +19,8 @@
             </p:growl> 
             <p:panelGrid id="panelPrincipal"
                          columns="1">
-                <p:wizard flowListener="#{indexBean.onFlowProcess}">
+                <p:wizard flowListener="#{indexBean.onFlowProcess}" widgetVar="wiz" nextLabel="Siguiente" backLabel="Atrás">
                     <p:tab id="persona" title="Persona">
-                        <p:messages/>
                         <p:panelGrid id="datosPersonales"
                                      columns="2">
                             <p:outputLabel for="cedulaPersona" value="Cedula:"/>
@@ -52,7 +51,6 @@
                     </p:tab>
 
                     <p:tab id="contribuyente" title="Contribuyente">
-                        <p:messages/>
                         <p:panelGrid id="datosContribuyente"
                                      columns="2">
                             <p:outputLabel for="rucContribuyente" value="RUC:"/>
@@ -73,7 +71,6 @@
                         </p:panelGrid>
                     </p:tab>
                     <p:tab id="establecimiento" title="Establecimiento">
-                        <p:messages/>
                         <p:panelGrid id="datosEstablecimientos"
                                      columns="2">
                             <p:outputLabel for="establecimientosLst" value="Establecimiento:"/>
@@ -107,11 +104,14 @@
                         <p:panelGrid id="panelMonto"
                             columns="2">
                             <p:outputLabel for="montoTransfer" value="Monto"/>
-                            <p:inputNumber id="montoTransfer" value="#{indexBean.monto}"/>   
+                            <p:inputNumber id="montoTransfer" value="#{indexBean.monto}"
+                                           required="true"
+                                           requiredMessage="El campo monto es obligatorio">
+                                <p:ajax event="blur" update="transferenciaForm:panelMonto" listener="#{indexBean.validarMonto()}"/>
+                            </p:inputNumber>   
                         </p:panelGrid>
                     </p:tab>
                     <p:tab id="transferencia" title="Transferencia">
-                        <p:messages/>
                         <p:panelGrid id="datosTransferencia"
                                      columns="2">
                             <p:outputLabel for="razon" value="Contribuyente"/>
@@ -126,9 +126,12 @@
                             <p:outputLabel for="monto" value="Monto a transferir:"/>
                             <h:outputText id="monto" value="#{indexBean.monto}"/>
                             
-                            <p:commandButton value="Confirmar" id="btnSubmit" update="growl"   process="@this"
-                                             actionListener="#{indexBean.confirmarTransferencia()}" style="margin-right:20px;" 
-                                             styleClass="ui-priority-primary" />
+                            <p:commandButton value="Confirmar" id="btnSubmit" 
+                                             update="growl"
+                                             actionListener="#{indexBean.confirmarTransferencia()}" 
+                                             style="margin-right:20px;" 
+                                             styleClass="ui-priority-primary" 
+                                             action="/index.xhtml?faces-redirect=true"/>
                         </p:panelGrid>
                     </p:tab>
                 </p:wizard>
